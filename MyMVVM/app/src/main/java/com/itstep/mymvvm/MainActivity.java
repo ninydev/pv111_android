@@ -8,17 +8,25 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.itstep.mymvvm.models.UserModel;
+import com.itstep.mymvvm.mvvm.UserMvvm;
+import com.itstep.mymvvm.repositories.UserRepository;
+
 public class MainActivity extends AppCompatActivity {
+
+    UserMvvm userMvvm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        setContentView(R.layout.user_view);
+
+
+
+        UserModel userModel = UserRepository.createModel();
+        userMvvm = new UserMvvm(this,userModel);
+
+        userMvvm.fromModelToView();
     }
 }
