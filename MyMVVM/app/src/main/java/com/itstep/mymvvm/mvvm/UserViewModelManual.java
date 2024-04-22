@@ -9,14 +9,16 @@ import com.itstep.mymvvm.MainActivity;
 import com.itstep.mymvvm.R;
 import com.itstep.mymvvm.models.UserModel;
 
-public class UserMvvm {
+public class UserViewModelManual implements OnModelChangeEvent
+{
 
-    private UserModel model;
-    private MainActivity activity;
+    private final UserModel model;
+    private final MainActivity activity;
 
-    public UserMvvm(MainActivity activity, UserModel model){
+    public UserViewModelManual(MainActivity activity, UserModel model){
         this.activity = activity;
         this.model = model;
+        this.model.setViewModel(this);
     }
 
     public void connectTwoWay() {
@@ -35,8 +37,9 @@ public class UserMvvm {
 
             @Override
             public void afterTextChanged(Editable s) {
-                model.setEmail(s.toString());
-                ((TextView) activity.findViewById(R.id.user_dev)).setText(model.getEmail());
+                // Контролирую процесс обновления поля - можно здесь
+                // if(!s.toString().equals(model.getEmail()))
+                    model.setEmail(s.toString());
             }
         });
     }
@@ -61,4 +64,17 @@ public class UserMvvm {
         model.setEmail(txtEmail.getText().toString());
     }
 
+    /**
+     * В этом интерфейсе мы описываем, процесс обновления полей, в случае обновления модели
+     */
+    @Override
+    public void onModelChangeEvent() {
+        // Если речь идет о статических полях - то никаких проблем у меня не возникает
+        ((TextView) activity.findViewById(R.id.user_dev)).setText(model.getEmail());
+
+        // Еще эффективнее контролировать перересовку тут - что бы зря не обновлять формы
+        TextInputEditText txtEmail = activity.findViewById(R.id.user_email);
+        if (!txtEmail.getText().toString().equals(model.getEmail()))
+            txtEmail.setText(model.getEmail());
+    }
 }
