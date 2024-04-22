@@ -28,5 +28,7 @@ public class MainActivity extends AppCompatActivity {
         userMvvm = new UserMvvm(this,userModel);
 
         userMvvm.fromModelToView();
+
+        userMvvm.connectTwoWay();
     }
 }

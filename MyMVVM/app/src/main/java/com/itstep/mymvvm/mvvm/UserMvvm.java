@@ -1,5 +1,7 @@
 package com.itstep.mymvvm.mvvm;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -15,6 +17,28 @@ public class UserMvvm {
     public UserMvvm(MainActivity activity, UserModel model){
         this.activity = activity;
         this.model = model;
+    }
+
+    public void connectTwoWay() {
+        TextInputEditText txtEmail = activity.findViewById(R.id.user_email);
+
+        txtEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                model.setEmail(s.toString());
+                ((TextView) activity.findViewById(R.id.user_dev)).setText(model.getEmail());
+            }
+        });
     }
 
 
