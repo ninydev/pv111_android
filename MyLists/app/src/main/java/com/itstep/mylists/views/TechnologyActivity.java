@@ -6,6 +6,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.itstep.mylists.R;
+import com.itstep.mylists.viewmodels.TechnologyViewModel;
 
 public class TechnologyActivity extends AppCompatActivity {
 
@@ -16,6 +17,8 @@ public class TechnologyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.technology_view);
+
+        TechnologyViewModel viewModel = new TechnologyViewModel(this);
     }
 
 
