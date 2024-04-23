@@ -13,6 +13,6 @@ public class CountryStringsRepository {
     }
 
     public static ArrayAdapter<String> getArrayAdapter(Context activity){
-        return new ArrayAdapter<>(activity, R.layout.my_simple_list_item_1, data );
+        return new ArrayAdapter<>(activity, R.layout.my_simple_list_item_1, CountryStringsRepository.getData() );
     }
 }
