@@ -58,7 +58,7 @@ public class ListViewTechnologyAdapter extends ArrayAdapter<TechnologyModel>
      * @return
      */
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.d("keeper", "getView: " + position);
+
 
         // Если элемент еще не создавался - то его нужно создать первый раз
         if (convertView == null) {

@@ -1,5 +1,7 @@
 package com.itstep.mylists.models;
 
+import androidx.annotation.NonNull;
+
 import java.util.UUID;
 
 public class TechnologyModel {
@@ -32,5 +34,11 @@ public class TechnologyModel {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name;
     }
 }
